@@ -1,6 +1,6 @@
 import requests
-from config import *
-from preprocess import PreProcessor
+from model.config import *
+from model.preprocess import PreProcessor
 from sentence_transformers import SentenceTransformer, util
 
 class DataHandler:
