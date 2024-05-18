@@ -5,3 +5,5 @@ HEADERS = {
 }
 
 PUNCTUATIONS = r'''!()-[]{};:'"\\,<>./?@#$%^&*_~'''
+
+SIMILARITY_THRESHOLD = 0.8
