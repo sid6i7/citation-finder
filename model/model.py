@@ -40,13 +40,12 @@ class Model:
     the similarities between them using SentenceTransformer embeddings.
     """
 
-    def __init__(self) -> None:
+    def __init__(self, rawData) -> None:
         """
         Initializes the Model instance, processes the data, and encodes the text
         using the SentenceTransformer model.
         """
-        self.dataHandler = DataHandler()
-        self.preprocessor = PreProcessor(self.dataHandler.data)
+        self.preprocessor = PreProcessor(rawData)
         self.responses, self.sources = self.preprocessor.preprocess()
         self.model = SentenceTransformer('distilbert-base-nli-mean-tokens')
         self.__get_sentence_embeddings()

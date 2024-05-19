@@ -49,9 +49,8 @@ class PreProcessor:
         """
         all_responses = []
         all_sources = []
-        if rawData['data']['data']:
-            data = rawData['data']['data']
-            for group in data:
+        if rawData:
+            for group in rawData:
                 all_responses.append({
                     'id': group['id'],
                     'text': group['response']
@@ -92,6 +91,8 @@ class PreProcessor:
         Returns:
             str: The cleaned text.
         """
+        if type(text) == type([]):
+            text = " ".join(text)
         text = re.sub(r'https?://\S+|www\.\S+', '', text)
         text = re.sub(r'<.*?>', '', text)
         text = text.translate(str.maketrans('', '', string.punctuation))
