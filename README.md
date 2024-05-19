@@ -97,7 +97,7 @@ The project requires manual installation of pre-requisites and their respective 
 
 1. Install Python requirements using pip. (Prefer using a virtual environment)
   ```sh
-    pip install model/requirements.txt
+    pip install -r model/requirements.txt
   ```
    
 2. Install React requirements using npm.
