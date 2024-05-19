@@ -1,5 +1,6 @@
 import re
 import string
+import logging
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
@@ -9,6 +10,8 @@ from model.config import *
 nltk.download('stopwords')
 nltk.download('punkt')
 nltk.download('wordnet')
+
+logger = logging.getLogger(__name__)
 
 class PreProcessor:
     """
@@ -25,6 +28,7 @@ class PreProcessor:
         self.stopWords = stopwords.words('english')
         self.lemmatizer = WordNetLemmatizer()
         self.rawData = rawData
+        logging.info("initialized preprocessor")
 
     def preprocess(self):
         """
@@ -57,6 +61,7 @@ class PreProcessor:
                 })
                 if group['source']:
                     all_sources.append(group['source'])
+        logging.info("parsed raw data")
         return all_responses, all_sources
     
     def __preprocess_text(self, responses, sources):
@@ -78,6 +83,7 @@ class PreProcessor:
                 if 'context' in source:
                     clean_context = self.clean_text(source['context'])
                     sources[i][j]['context'] = clean_context
+        logging.info("cleaned parsed data")
         return responses, sources
         
     def clean_text(self, text):

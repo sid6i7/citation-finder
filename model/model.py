@@ -1,7 +1,18 @@
 import requests
+import logging
 from model.config import *
 from model.preprocess import PreProcessor
 from sentence_transformers import SentenceTransformer, util
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(LOG_FILE_PATH),
+    ]
+)
+
+logger = logging.getLogger(__name__)
 
 class DataHandler:
     """
@@ -21,6 +32,7 @@ class DataHandler:
         Returns:
             dict: The JSON response containing messages data.
         """
+        logging.info("Fetching messages")
         messages_data = None
         try:
             response = requests.get(
@@ -30,7 +42,7 @@ class DataHandler:
             response.raise_for_status()
             messages_data = response.json()
         except Exception as e:
-            print(f"Some error occured {e}")
+            logging.error(f"Some error occured {e}")
         return messages_data
 
 
@@ -45,6 +57,7 @@ class Model:
         Initializes the Model instance, processes the data, and encodes the text
         using the SentenceTransformer model.
         """
+        logging.info("initializing model")
         self.preprocessor = PreProcessor(rawData)
         self.responses, self.sources = self.preprocessor.preprocess()
         self.model = SentenceTransformer('distilbert-base-nli-mean-tokens')
@@ -54,6 +67,7 @@ class Model:
         """
         Encodes the responses and sources using the SentenceTransformer model.
         """
+        logging.info("start generating sentence embeddings")
         for idx, response in enumerate(self.responses):
             embedded_response = self.model.encode(response['text'])
             self.responses[idx]['embeddings'] = embedded_response
@@ -61,6 +75,7 @@ class Model:
             for j, source in enumerate(sources):
                 embedded_source = self.model.encode(source['context'])
                 self.sources[i][j]['embeddings'] = embedded_source
+        logging.info("finish generating sentence embeddings")
     
     def get_citations(self):
         """
@@ -70,6 +85,7 @@ class Model:
         Returns:
             list: The updated list of responses with citations.
         """
+        logging.info("start finding citations")
         for idx, response in enumerate(self.responses):
             response_embedding = response['embeddings']
             citations = []
@@ -85,5 +101,5 @@ class Model:
 
             self.responses[idx]['citations'] = citations
             del self.responses[idx]['embeddings']
-
+        logging.info("finish finding citations")
         return self.responses
