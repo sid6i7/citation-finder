@@ -79,6 +79,11 @@ Given a set of probable sources associated with a response, this project aims to
 └── server.py
 ```
 
+#### Structure Description:
+- **model**: contains the python model
+- **client**: contains the react frontend
+- **server.py**: contains fastAPI backend
+
 ## Getting Started
 
 The project requires manual installation of pre-requisites and their respective requirements as given in **model/requirements.txt** for the model and **client/package.json** for the client.
@@ -114,7 +119,7 @@ The project requires manual installation of pre-requisites and their respective 
 The project should be up when you visit localhost at port 3000.
 
 ### About Config
-Following variable can hugely affect the quality of finding citations. These can be changed in the **model/config.py**.
+Following variable can hugely affect the quality of finding citations. It can be changed in the **model/config.py**.
 
 **SIMILARITY_THRESHOLD**: Is used to compare how similar the response text should be to the context of the source.
 - It can range from 0 to 1
