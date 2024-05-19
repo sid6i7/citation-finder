@@ -34,14 +34,14 @@
 
 Given a set of probable sources associated with a response, this project aims to provide you with the list of sources that the response has been generated from.
 
-<div style="display:flex; flex-direction:column">
 <b>Example Input</b>
+<div style="display:flex; flex-direction:column">
 <img src="./src/images/example_input.png" alt="App">
 <br/>
 </div>
-
-<div style="display:flex; flex-direction:column">
+<br/>
 <b>Example Output</b>
+<div style="display:flex; flex-direction:column">
 <img src="./src/images/example_output.png" alt="App">
 <br/>
 </div>
