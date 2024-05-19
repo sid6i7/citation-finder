@@ -34,13 +34,13 @@
 
 Given a set of probable sources associated with a response, this project aims to provide you with the list of sources that the response has been generated from.
 
-<div>
+<div style="display:flex; flex-direction:column">
 <b>Example Input</b>
 <img src="./src/images/example_input.png" alt="App">
 <br/>
 </div>
 
-<div>
+<div style="display:flex; flex-direction:column">
 <b>Example Output</b>
 <img src="./src/images/example_output.png" alt="App">
 <br/>
@@ -129,7 +129,6 @@ Following variable can hugely affect the quality of finding citations. These can
 <div style="display: flex; justify-content: center;">
   <img src="./src/images/app.png" alt="App">
 </div>
-<hr>
 
 **Current Page**: Page number associated with the test API endpoint.
 
@@ -140,7 +139,6 @@ Following variable can hugely affect the quality of finding citations. These can
   <img src="./src/images/app_output.png" alt="App">
 </div>
 <hr>
-
 
 ## References
 
